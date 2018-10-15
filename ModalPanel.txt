@@ -1,0 +1,77 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
+
+    // Author John Harrington
+
+public class ModalPanel : MonoBehaviour
+{
+
+    public Text startQuestion;
+    public Image iconImage;
+    public Button twoButton;
+    public Button threeButton;
+    public Button fourButton;
+    public GameObject startPanelObject;
+    public GameObject startPanelCanvasObject;
+
+    
+
+
+
+    private static ModalPanel modalPanel;
+
+    public static ModalPanel Instance()
+    {
+        if (!modalPanel)
+        {
+            modalPanel = FindObjectOfType(typeof(ModalPanel)) as ModalPanel;
+            if (!modalPanel)
+            {
+                Debug.LogError("There needs to be one active ModalPanel script on a GameObject in your scene.");
+            }
+
+        }
+        return modalPanel;
+    }
+    // 2/3/4 Players: A string, a 2 Player event, a 3 Player event and 4 Player event
+    // Setting up if game is 2 player, 3 player, or 4 player
+    public void Choice(string question, UnityAction twoEvent, UnityAction threeEvent, UnityAction fourEvent)
+    {
+        /*startPanelCanvasObject.SetActive(true);
+        startPanelObject.SetActive(true);
+        twoButton.onClick.RemoveAllListeners();
+        twoButton.onClick.AddListener(twoEvent);
+        twoButton.onClick.AddListener(CloseStartPanel);
+        
+
+        threeButton.onClick.RemoveAllListeners();
+        threeButton.onClick.AddListener(threeEvent);
+        threeButton.onClick.AddListener(CloseStartPanel);
+        
+
+        fourButton.onClick.RemoveAllListeners();
+        fourButton.onClick.AddListener(fourEvent);
+        fourButton.onClick.AddListener(CloseStartPanel);*/
+        
+
+        startQuestion.text = question;
+         
+        
+        //this.iconImage.gameObject.SetActive(false);
+        twoButton.gameObject.SetActive(true);
+        threeButton.gameObject.SetActive(true);
+        fourButton.gameObject.SetActive(true);
+    }
+
+    
+
+    void CloseStartPanel()
+    {
+        startPanelObject.SetActive(false);
+    }
+
+
+}

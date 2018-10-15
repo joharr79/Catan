@@ -1,0 +1,160 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
+
+    // Author John Harrington
+
+public class TestModalWindow : MonoBehaviour
+{
+    
+    //public GameObject devClickPanelObject;
+    public GameObject playerNamePanelObject;
+    public GameObject playerNameDialogObject1;
+    public GameObject playerNameDialogObject2;
+    public GameObject playerNameDialogObject3;
+    public GameObject playerNameDialogObject4;
+
+    public bool IsTwoPlayers = false;
+    public bool IsThreePlayers = false;
+    public bool IsFourPlayers = false;
+
+    private ModalPanel modalPanel;
+    private DevCardPanel devCardPanel;
+    //public PlayerNamePanel playerNamePanel;
+    
+    private DisplayManager displayManager;
+
+    private UnityAction twoPlayerAction;
+    private UnityAction threePlayerAction;
+    private UnityAction fourPlayerAction;
+
+    private UnityAction chapelAction;
+    private UnityAction greatHallAction;
+    private UnityAction knightAction;
+    private UnityAction libraryAction;
+    private UnityAction marketAction;
+    private UnityAction monopolyAction;
+    private UnityAction roadBuildingAction;
+    private UnityAction universityAction;
+    private UnityAction yearOfPlentyAction;
+	// Testing to make sure modal window is working correctly
+    void Awake()
+    {
+        modalPanel = ModalPanel.Instance();
+        devCardPanel = DevCardPanel.Instance();
+        //playerNamePanel = PlayerNamePanel.Instance();
+
+        displayManager = DisplayManager.Instance();
+
+        twoPlayerAction = new UnityAction(TwoPlayerFunction);
+        threePlayerAction = new UnityAction(ThreePlayerFunction);
+        fourPlayerAction = new UnityAction(FourPlayerFunction);
+
+        chapelAction = new UnityAction(ChapelFunction);
+        greatHallAction = new UnityAction(GreatHallFunction);
+        knightAction = new UnityAction(KnightFunction);
+        libraryAction = new UnityAction(LibraryFunction);
+        marketAction = new UnityAction(MarketFunction);
+        monopolyAction = new UnityAction(MonopolyFunction);
+        roadBuildingAction = new UnityAction(RoadBuildingFunction);
+        universityAction = new UnityAction(UniversityFunction);
+        yearOfPlentyAction = new UnityAction(YearOfPlentyFunction);
+        //devClickPanelObject.SetActive(false);
+        HowManyPlayers();
+        
+    }
+
+    // Send to the Modal Panel to set up the Buttons and Functions to call
+    public void HowManyPlayers()
+    {
+        modalPanel.Choice("START GAME\nHow many people would like to play?", twoPlayerAction,
+            threePlayerAction, fourPlayerAction);
+        
+    }
+
+    public void BuyDevelopment()
+    {
+       devCardPanel.WhichDevCard(/*"Which Card Would you like to use?",*/ chapelAction, greatHallAction,
+            knightAction, libraryAction, marketAction, monopolyAction, roadBuildingAction, universityAction,
+            yearOfPlentyAction);
+    }
+
+
+    // These are wrapped into UnityActions
+
+    public void TwoPlayerFunction()
+    {
+       // modalPanel.startPanelObject.SetActive(false);
+        playerNamePanelObject.SetActive(true);
+        playerNameDialogObject1.SetActive(true);
+        IsTwoPlayers = true;
+        //playerNamePanel.PlayerName();
+    }
+
+    public void ThreePlayerFunction()
+    {
+      ///  modalPanel.startPanelObject.SetActive(false);
+        playerNamePanelObject.SetActive(true);
+        playerNameDialogObject1.SetActive(true);
+        IsThreePlayers = true;
+        //playerNamePanel.PlayerName();
+    }
+
+    public void FourPlayerFunction()
+    {
+      //  modalPanel.startPanelObject.SetActive(false);
+        playerNamePanelObject.SetActive(true);
+        playerNameDialogObject1.SetActive(true);
+        IsFourPlayers = true;
+        //playerNamePanel.PlayerName();
+    }
+
+    void ChapelFunction()
+    {
+
+    }
+
+    void GreatHallFunction()
+    {
+
+    }
+
+    void KnightFunction()
+    {
+
+    }
+
+    void LibraryFunction()
+    {
+
+    }
+
+    void MarketFunction()
+    {
+
+    }
+
+    void MonopolyFunction()
+    {
+
+    }
+
+    void RoadBuildingFunction()
+    {
+
+    }
+
+    void UniversityFunction()
+    {
+
+    }
+
+    void YearOfPlentyFunction()
+    {
+
+    }
+
+    
+}

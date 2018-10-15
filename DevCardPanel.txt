@@ -1,0 +1,121 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
+
+    // Author John Harrington
+
+public class DevCardPanel : MonoBehaviour {
+
+    // Variables for Development Cards
+    public Button chapelButton;
+    public Button greatHallButton;
+    public Button knightButton;
+    public Button libraryButton;
+    public Button marketButton;
+    public Button monopolyButton;
+    public Button roadBuildingButton;
+    public Button universityButton;
+    public Button yearOfPlentyButton;
+    public GameObject devCardPanelObject;
+    public GameObject devClickPanelObject;
+
+    private static DevCardPanel devCardPanel;
+
+    // Error logic for the Development Card Panel
+    public static DevCardPanel Instance()
+    {
+        if (!devCardPanel)
+        {
+            devCardPanel = FindObjectOfType(typeof(DevCardPanel)) as DevCardPanel;
+            if (!devCardPanel)
+            {
+                Debug.LogError("There needs to be one active DevCardPanel script on a GameObject in your scene.");
+            }
+
+
+        }
+        return devCardPanel;
+    }
+
+	// Which Dev card is clicked
+    public void WhichDevCard(UnityAction chapelEvent, UnityAction greatHallEvent,
+        UnityAction knightEvent, UnityAction libraryEvent, UnityAction marketEvent, UnityAction monopolyEvent,
+        UnityAction roadBuildingEvent, UnityAction universityEvent, UnityAction yearOfPlentyEvent)
+    {
+        devClickPanelObject.SetActive(false);
+        devCardPanelObject.SetActive(true);
+
+        chapelButton.onClick.RemoveAllListeners();
+        chapelButton.onClick.AddListener(chapelEvent);
+        chapelButton.onClick.AddListener(ClosePanel);
+        chapelButton.onClick.AddListener(ReopenDevClick);
+
+        greatHallButton.onClick.RemoveAllListeners();
+        greatHallButton.onClick.AddListener(greatHallEvent);
+        greatHallButton.onClick.AddListener(ClosePanel);
+        greatHallButton.onClick.AddListener(ReopenDevClick);
+
+
+        knightButton.onClick.RemoveAllListeners();
+        knightButton.onClick.AddListener(knightEvent);
+        knightButton.onClick.AddListener(ClosePanel);
+        knightButton.onClick.AddListener(ReopenDevClick);
+
+        libraryButton.onClick.RemoveAllListeners();
+        libraryButton.onClick.AddListener(libraryEvent);
+        libraryButton.onClick.AddListener(ClosePanel);
+        libraryButton.onClick.AddListener(ReopenDevClick);
+
+        marketButton.onClick.RemoveAllListeners();
+        marketButton.onClick.AddListener(marketEvent);
+        marketButton.onClick.AddListener(ClosePanel);
+        marketButton.onClick.AddListener(ReopenDevClick);
+
+        monopolyButton.onClick.RemoveAllListeners();
+        monopolyButton.onClick.AddListener(monopolyEvent);
+        monopolyButton.onClick.AddListener(ClosePanel);
+        monopolyButton.onClick.AddListener(ReopenDevClick);
+
+        roadBuildingButton.onClick.RemoveAllListeners();
+        roadBuildingButton.onClick.AddListener(roadBuildingEvent);
+        roadBuildingButton.onClick.AddListener(ClosePanel);
+        roadBuildingButton.onClick.AddListener(ReopenDevClick);
+
+        universityButton.onClick.RemoveAllListeners();
+        universityButton.onClick.AddListener(universityEvent);
+        universityButton.onClick.AddListener(ClosePanel);
+        universityButton.onClick.AddListener(ReopenDevClick);
+
+        yearOfPlentyButton.onClick.RemoveAllListeners();
+        yearOfPlentyButton.onClick.AddListener(yearOfPlentyEvent);
+        yearOfPlentyButton.onClick.AddListener(ClosePanel);
+        yearOfPlentyButton.onClick.AddListener(ReopenDevClick);
+
+        //this.question.text = question;
+
+
+        chapelButton.gameObject.SetActive(true);
+        greatHallButton.gameObject.SetActive(true);
+        knightButton.gameObject.SetActive(true);
+        libraryButton.gameObject.SetActive(true);
+        marketButton.gameObject.SetActive(true);
+        monopolyButton.gameObject.SetActive(true);
+        roadBuildingButton.gameObject.SetActive(true);
+        universityButton.gameObject.SetActive(true);
+        yearOfPlentyButton.gameObject.SetActive(true);
+
+    }
+
+    void ClosePanel()
+    {
+        devCardPanelObject.SetActive(false);
+    }
+
+    void ReopenDevClick()
+    {
+        devClickPanelObject.SetActive(true);
+    }
+
+}

@@ -1,0 +1,52 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+// Author John Harrington
+
+public class SpawnRandomHexes : MonoBehaviour
+{
+   
+    public Transform[] SpawnPoints;
+    public GameObject[] Hexes;
+    public SpawnRandomChits randomChits;
+    public RobberMoves placeRobber;
+    public SpawnRandomHexes coords;
+    public List<int> usedHexes = new List<int>();
+    public List<int> usedChits = new List<int>();
+    public RandomChitMaterial randomChitMaterial;
+     
+    
+    void Start()
+    {
+        SpawnHexes();
+        randomChits.desertObject = GameObject.Find("Desert(Clone)").transform.position;
+        
+        randomChits.SpawnChits();
+        
+        
+    }
+              
+    
+    // Spawning hexes randomly on table to make up board
+    public void SpawnHexes()
+    {
+        for (int spawnIndex = 0; spawnIndex < 19; ++spawnIndex)
+        {
+            int hexIndex = Random.Range(0, Hexes.Length); // set hex position index randomly and add to array
+
+            if (/*usedSpawnPoints.Contains(spawnIndex) ||*/ usedHexes.Contains(hexIndex))
+            {
+                --spawnIndex;
+            }
+            else
+            {
+                //usedSpawnPoints.Add(spawnIndex); // add used spawn points to a check list
+                usedHexes.Add(hexIndex); // add used hexes to check list
+
+                Instantiate(Hexes[hexIndex], SpawnPoints[spawnIndex].position, SpawnPoints[spawnIndex].rotation);
+            }
+        }
+    }
+}

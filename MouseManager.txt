@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+// John Harrington Code
+
+public class MouseManager : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+        
+    }
+	
+	// Update is called once per frame
+	void Update () {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hitInfo;
+	// Setting up Mouse to return where it is touching the game board.
+        if (Physics.Raycast(ray, out hitInfo))
+        {
+            GameObject ourHitObject = hitInfo.collider.transform.gameObject;
+            Debug.Log("Raycast hit: " + ourHitObject.name);
+        }
+        if (Input.GetMouseButton(0))
+        {
+
+        }
+	}
+}

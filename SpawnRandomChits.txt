@@ -1,0 +1,75 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+// Author John Harrington
+
+public class SpawnRandomChits : MonoBehaviour {
+
+    public Transform[] SpawnPoints;
+    public GameObject[] Chits;
+    public SpawnRandomHexes randomHexes;
+    public Vector3 desertObject;
+	public GameObject Robber;
+    //public Quaternion desertObjectRot;
+
+    //public List<int> usedSpawnPoints = new List<int>();
+
+    public List<int> usedChits = new List<int>();
+
+    
+
+
+    /*void OnCollisionEnter(Collision other)
+    {
+        Destroy(other.gameObject);
+    }*/
+    	// Spawning numbers randomly on top of hex board pieces
+    public void SpawnChits()
+    {
+
+        for (int spawnIndex = 0; spawnIndex < 19; ++spawnIndex)
+        {
+
+            int chitIndex = Random.Range(0, 18);
+            
+            if (usedChits.Contains(chitIndex) )
+            {
+                --spawnIndex;
+            }  /*else if (SpawnPoints[spawnIndex].transform.position.x == desertObject.x)
+            {
+                usedChits.Add(chitIndex);
+            }*/
+                //for (spawnIndex = 0; spawnIndex < 18; ++spawnIndex)
+                                    
+             else if ((SpawnPoints[spawnIndex].transform.position.x == desertObject.x) && 
+                     (SpawnPoints[spawnIndex].transform.position.z == desertObject.z))
+            {
+                
+
+            } else
+            {
+                //usedSpawnPoints.Add(spawnIndex); // add used spawn points to a check list
+                /*for (spawnIndex = 0; spawnIndex < 18; ++spawnIndex)
+                    if (SpawnPoints[spawnIndex].transform.position.x == desertObject.x)*/
+              /* if (SpawnPoints[spawnIndex].transform.position.x == desertObject.x)
+                {
+                    usedChits.Add(chitIndex);
+                }      */  
+                usedChits.Add(chitIndex);
+
+                Instantiate(Chits[chitIndex], SpawnPoints[spawnIndex].position, SpawnPoints[spawnIndex].rotation);
+            }
+            
+        }
+        // Spawning Robber onto desert hex
+        Instantiate(Robber, new Vector3(desertObject.x, 3.3f, desertObject.z), 
+            (Robber.transform.rotation = Quaternion.Euler(-90, 0, 0)));
+        //Robber.transform.position = new Vector3();
+    
+        
+    
+    }  
+}
+

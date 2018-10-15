@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
+
+// Author John Harrington
+
+public class MyNetworkManager : NetworkManager {
+	// Setting up Network to play over Multiple PC's
+    public void MyStartHost()
+    {
+        Debug.Log(Time.timeSinceLevelLoad + " Starting Host.");
+        StartHost();
+    }
+
+    public override void OnStartHost()
+    {
+        Debug.Log(Time.timeSinceLevelLoad + " Host started. ");
+    }
+
+    public override void OnStartClient(NetworkClient myClient)
+    {
+        Debug.Log(Time.timeSinceLevelLoad + " Client start requested.");
+        InvokeRepeating("PrintDots", 0f, 1f);
+        //base.OnStartClient(myClient);
+    }
+
+    public override void OnClientConnect(NetworkConnection conn)
+    {
+        Debug.Log(Time.timeSinceLevelLoad + "Client is connected to IP: " + conn.address);
+        CancelInvoke();
+        //base.OnClientConnect(conn);
+    }
+
+    void PrintDots()
+    {
+        Debug.Log(".");
+    }
+}

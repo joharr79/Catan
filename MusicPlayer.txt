@@ -1,0 +1,24 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+// John Harrington Code
+
+public class MusicPlayer : MonoBehaviour {
+    static MusicPlayer instance = null;
+    // Running music throughout all scenes.
+
+    void Awake()
+    {
+        
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            GameObject.DontDestroyOnLoad(gameObject);
+        }
+    }
+}
